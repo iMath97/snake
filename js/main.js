@@ -11,18 +11,20 @@ const HEIGHT = 800;
 
 let playerPos;
 let playerGrow;
+let playerDead;
 
 // colors
 let backgroundColor = "#117711";
 let playerColor = "#0000f5";
 let appleColor = "#ff0000";
+let textColor = "#000000";
 
 // objects
 let player = new Player(WIDTH, HEIGHT, playerColor);
 let apple = new Apple(WIDTH, HEIGHT, appleColor);
 
 // gameloop
-setInterval(gameloop, 200);
+setInterval(gameloop, 100);
 
 function gameloop(){
     draw();
@@ -32,6 +34,8 @@ function gameloop(){
     apple.draw(ctx);
     playerGrow = apple.checkEaten(playerPos);
     player.grow(playerGrow);
+    player.dead();
+    playerDead = player.getIsDead();
 }
 
 // functions
@@ -39,6 +43,13 @@ function draw(){
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
     ctx.fillStyle = backgroundColor;
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
+    if(playerDead){
+        let tekst = "Game over";
+        let lengteTekst = ctx.measureText(tekst).width;
+        ctx.fillStyle = textColor;
+        ctx.font = "60px Verdana";
+        ctx.fillText(tekst, (WIDTH/2)-(lengteTekst/2), 300);
+    }
 }
 
 

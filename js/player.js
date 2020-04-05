@@ -8,17 +8,19 @@ export default class Player{
     speed;
     direction;
     playerGrow;
+    isDead;
     
     constructor(gameWidth, gameHeight, color){
         this.width = 20;
         this.height = 20; 
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
-        this.snake = [{x: 400, y: 400}];
+        this.snake = [{x: 400, y: 400}, {x: 420, y: 400}, {x: 440, y: 400}];
         this.color = color;
         this.speed = 20;
-        this.direction = "down";
+        this.direction = "right";
         this.playerGrow = false;
+        this.isDead = false;
     }
 
     draw(ctx){
@@ -62,10 +64,13 @@ export default class Player{
                 break;
         }
 
-        this.snake.unshift(head);
-        if(this.playerGrow == false){
-            this.snake.pop();
+        if(this.isDead == false){
+            this.snake.unshift(head);
+            if(this.playerGrow == false){
+                this.snake.pop();
+            }
         }
+        
         
         this.playerGrow = false;
     }
@@ -103,5 +108,17 @@ export default class Player{
         if(eaten){
             this.playerGrow = true;
         }
+    }
+
+    dead(){
+        for(let i = 1; i<this.snake.length;i++){
+            if(this.snake[0].x == this.snake[i].x && this.snake[0].y == this.snake[i].y){
+                this.isDead = true;
+            }
+        }   
+    }
+
+    getIsDead(){
+        return this.isDead;
     }
 }
