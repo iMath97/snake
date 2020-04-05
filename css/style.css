@@ -1,0 +1,10 @@
+.canvas {
+  display: flex;
+  justify-content: center;
+}
+
+#canvas {
+  border: black 1px solid;
+}
+
+/*# sourceMappingURL=style.css.map */
