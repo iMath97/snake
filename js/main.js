@@ -13,6 +13,8 @@ let playerPos;
 let playerGrow;
 let playerDead;
 
+let score = 0;
+
 // colors
 let backgroundColor = "#117711";
 let playerColor = "#0000f5";
@@ -36,6 +38,9 @@ function gameloop(){
     player.grow(playerGrow);
     player.dead();
     playerDead = player.getIsDead();
+    if(playerGrow){
+        score++;
+    }
 }
 
 // functions
@@ -50,6 +55,14 @@ function draw(){
         ctx.font = "60px Verdana";
         ctx.fillText(tekst, (WIDTH/2)-(lengteTekst/2), 300);
     }
+    
+    // score
+    let scoreText = "Score: " + score;
+    let lengteTekst = ctx.measureText(scoreText).width;
+    ctx.fillStyle = textColor;
+    ctx.font = "30px Verdana";
+    ctx.fillText(scoreText, WIDTH - (lengteTekst + 10), 40);
+    
 }
 
 
